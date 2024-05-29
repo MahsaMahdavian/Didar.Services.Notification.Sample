@@ -8,6 +8,7 @@ namespace Didar.Services.Notification.Application.Features.Notification.Sms.Prov
 
 public class OneOfSmsProvider : ISmsProvider
 {
+    public string Name => "OneOfSmsProvider";
 
     public Task<string> SendAsnc(string phoneNumber, string message)
     {

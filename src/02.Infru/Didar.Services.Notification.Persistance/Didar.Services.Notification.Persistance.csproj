@@ -8,6 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.6" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\01.Core\Didar.Services.Notification.Application\Didar.Services.Notification.Application.csproj" />
+    <ProjectReference Include="..\..\01.Core\Didar.Services.Notification.Domain\Didar.Services.Notification.Domain.csproj" />
   </ItemGroup>
 
 </Project>

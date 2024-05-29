@@ -10,4 +10,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\00.framework\Didar.Services.Notification.Sample.Framework\Didar.Services.Notification.Framework.csproj" />
+    <ProjectReference Include="..\..\01.Core\Didar.Services.Notification.Application\Didar.Services.Notification.Application.csproj" />
+    <ProjectReference Include="..\..\02.Infru\Didar.Services.Notification.Persistance\Didar.Services.Notification.Persistance.csproj" />
+  </ItemGroup>
+
 </Project>
