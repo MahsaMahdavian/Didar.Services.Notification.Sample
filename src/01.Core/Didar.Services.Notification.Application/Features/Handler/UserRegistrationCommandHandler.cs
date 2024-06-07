@@ -19,7 +19,7 @@ public class UserRegistrationCommandHandler(EmailService emailService, IDbContex
         var user = UserEntity.Create(request.Name, request.PhoneNumber, request.EmailAddress);
         //save To Db
         await dbContext.SaveAsync(cancellationToken);
-        //await emailService.SendEmailAsync(user.EmailAddress, "You registred Succefully,Welcome!");
+      
         
     }
 }

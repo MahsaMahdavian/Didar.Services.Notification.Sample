@@ -1,5 +1,8 @@
-﻿using Didar.Services.Notification.Application.Publisher;
+﻿using Didar.Services.Notification.Application.Interfaces;
+using Didar.Services.Notification.Application.Publisher;
 using Didar.Services.Notification.Application.Services;
+using Didar.Services.Notification.Domain;
+using MassTransit;
 using MediatR.NotificationPublishers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,8 +15,9 @@ public static class ServiceCollectionExtension
     public static IServiceCollection ApplicationServices(this IServiceCollection services,
          IConfiguration configuration)
     {
-        services.AddSingleton<EmailService>();
-        services.AddSingleton<SmsService>();
+        services.AddKeyedScoped<ISendMessageService, EmailService>("Email");
+        services.AddKeyedScoped<ISendMessageService,SmsService>("Sms");
+
         services.AddHostedService<EventPublisherWorker>();
         var assembly = typeof(ServiceCollectionExtensions).Assembly;
         services.AddMediatR(configuration =>
@@ -22,7 +26,16 @@ public static class ServiceCollectionExtension
             configuration.AutoRegisterRequestProcessors = true;
             configuration.NotificationPublisher = new TaskWhenAllPublisher();
         });
-     
+
+        services.AddMassTransit(x =>
+        {
+            x.UsingRabbitMq((ctx, cfg) =>
+            {
+                cfg.Host(configuration["EventBusSettings:HostAddress"]);
+            });
+
+            x.AddConsumers(typeof(AssemblyMarker).Assembly);
+        });
         return services;
     }
 }
