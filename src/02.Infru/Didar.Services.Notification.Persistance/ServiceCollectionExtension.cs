@@ -1,5 +1,5 @@
 ﻿using Didar.Services.Notification.Application.Interfaces;
-using Didar.Services.Notification.Persistance.Configuration;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,7 +12,7 @@ public static class ServiceCollectionExtension
     {
         services.AddDbContext<ApplicationDbContext>(x =>
         {
-            //x.UseSqlServer(connectionString);
+            x.UseSqlServer(configuration.GetConnectionString("ApplicationDb"));
             x.LogTo(Console.WriteLine);
         });
         services.AddDbContext<MessageDbContext>(x =>

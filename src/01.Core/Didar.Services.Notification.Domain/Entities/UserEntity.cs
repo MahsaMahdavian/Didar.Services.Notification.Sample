@@ -13,6 +13,8 @@ public class UserEntity : BaseEntity
     public string Name { get; private set; }
     public string PhoneNumber { get; private set; }
     public string EmailAddress { get; private set; }
+    public List<OrderEntity> UserOrders { get; private set; }
+    public UserWalletEntity UserWallet { get; private set; }
 
     public static UserEntity Create(string name, string phoneNumber, string emailAddress)
     {

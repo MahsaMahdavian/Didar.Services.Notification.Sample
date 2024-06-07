@@ -1,4 +1,5 @@
-﻿using Didar.Services.Notification.Application.Features.Notification.Sms;
+﻿using Didar.Services.Notification.Application.EventHandlers;
+using Didar.Services.Notification.Application.Features.Notification.Sms;
 using Didar.Services.Notification.Application.Features.Notification.Sms.Provider;
 using Didar.Services.Notification.Application.Interfaces;
 using Didar.Services.Notification.Application.Publisher;
@@ -32,12 +33,20 @@ public static class ServiceCollectionExtension
 
         services.AddMassTransit(x =>
         {
-            x.UsingRabbitMq((ctx, cfg) =>
+            x.SetKebabCaseEndpointNameFormatter();
+            x.AddConsumer<SendSmsToUserCreatedEventHandler>();
+            //x.AddConsumers(typeof(AssemblyMarker).Assembly);
+            x.UsingRabbitMq((context, cfg) =>
             {
-                cfg.Host(configuration["BrokerConfiguration:Host"]);
-            });
+                cfg.Host(new Uri(configuration["Masstransit:RabbitMqEndpoint"]!), hst =>
+                {
+                    hst.Username("guest");
+                    hst.Password("newpassword");
+                });
 
-            x.AddConsumers(typeof(AssemblyMarker).Assembly);
+                cfg.UseInMemoryOutbox(context);
+                cfg.ConfigureEndpoints(context);
+            });
         });
         return services;
     }

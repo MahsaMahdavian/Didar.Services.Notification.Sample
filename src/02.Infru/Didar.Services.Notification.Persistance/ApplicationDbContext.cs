@@ -14,16 +14,17 @@ public class ApplicationDbContext : DbContext
 {
     public ApplicationDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
     {
-
+        Database.EnsureCreated();
     }
 
 
     public DbSet<UserEntity> Users => Set<UserEntity>();
     public DbSet<OrderEntity> Orders => Set<OrderEntity>();
     public DbSet<ProductEntity> Products => Set<ProductEntity>();
+    public DbSet<UserWalletEntity> UserWallet => Set<UserWalletEntity>();
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(OutboxEntityConfiguration).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         base.OnModelCreating(modelBuilder);
     }
 
