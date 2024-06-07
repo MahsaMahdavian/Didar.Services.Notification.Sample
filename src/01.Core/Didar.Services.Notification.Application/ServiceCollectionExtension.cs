@@ -1,4 +1,6 @@
-﻿using Didar.Services.Notification.Application.Interfaces;
+﻿using Didar.Services.Notification.Application.Features.Notification.Sms;
+using Didar.Services.Notification.Application.Features.Notification.Sms.Provider;
+using Didar.Services.Notification.Application.Interfaces;
 using Didar.Services.Notification.Application.Publisher;
 using Didar.Services.Notification.Application.Services;
 using Didar.Services.Notification.Domain;
@@ -15,9 +17,10 @@ public static class ServiceCollectionExtension
     public static IServiceCollection ApplicationServices(this IServiceCollection services,
          IConfiguration configuration)
     {
+        services.AddScoped<ISmsProvider, OneOfSmsProvider>();
         services.AddKeyedScoped<ISendMessageService, EmailService>("Email");
         services.AddKeyedScoped<ISendMessageService,SmsService>("Sms");
-
+        
         services.AddHostedService<EventPublisherWorker>();
         var assembly = typeof(ServiceCollectionExtensions).Assembly;
         services.AddMediatR(configuration =>
@@ -31,7 +34,7 @@ public static class ServiceCollectionExtension
         {
             x.UsingRabbitMq((ctx, cfg) =>
             {
-                cfg.Host(configuration["EventBusSettings:HostAddress"]);
+                cfg.Host(configuration["BrokerConfiguration:Host"]);
             });
 
             x.AddConsumers(typeof(AssemblyMarker).Assembly);

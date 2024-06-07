@@ -1,3 +1,4 @@
+using Carter;
 using Didar.Services.Notification.Application.Interfaces;
 using Didar.Services.Notification.Framework.Extention;
 using Didar.Services.Notification.WebApi.Installer;
@@ -13,6 +14,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.InstallService<ApplicationServiceInstaller>();
 builder.InstallService<InfrastructureInstaller>();
+builder.Services.AddCarter();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -28,4 +30,5 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.MapCarter();
 app.Run();

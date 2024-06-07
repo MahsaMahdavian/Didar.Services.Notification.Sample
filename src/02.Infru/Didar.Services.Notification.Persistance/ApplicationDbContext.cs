@@ -20,6 +20,7 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<UserEntity> Users => Set<UserEntity>();
     public DbSet<OrderEntity> Orders => Set<OrderEntity>();
+    public DbSet<ProductEntity> Products => Set<ProductEntity>();
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(OutboxEntityConfiguration).Assembly);

@@ -11,7 +11,7 @@ namespace Didar.Services.Notification.Application.Services;
 public class SmsService(ISmsProvider smsProvider,
     IDbContext dbContext): ISendMessageService
 {
-    private readonly IDbContext _dbContext= dbContext;
+    //private readonly IDbContext _dbContext= dbContext;
 
     public string Name => "Sms";
 

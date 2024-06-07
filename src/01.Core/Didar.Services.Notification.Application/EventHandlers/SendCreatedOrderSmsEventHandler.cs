@@ -8,9 +8,10 @@ using Microsoft.Extensions.Logging;
 
 namespace Didar.Services.Notification.Application.EventHandlers;
 
-public class SendCreatedOrderSmsEventHandler(IServiceProvider serviceProvider,
-    ILogger<SendCreatedOrderSmsEventHandler> logger) 
-    : INotificationHandler<DomainEventWrapper<SendCreatedOrderSmsEvent>>
+public class SendCreatedOrderSmsEventHandler(
+    IServiceProvider serviceProvider,
+    ILogger<SendCreatedOrderSmsEventHandler> logger
+    )  : INotificationHandler<DomainEventWrapper<SendCreatedOrderSmsEvent>>
 {
     public async Task Handle(DomainEventWrapper<SendCreatedOrderSmsEvent> notification, CancellationToken cancellationToken)
     {

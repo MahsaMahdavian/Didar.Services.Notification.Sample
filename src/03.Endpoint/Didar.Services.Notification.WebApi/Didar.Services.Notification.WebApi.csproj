@@ -1,19 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Carter" Version="8.2.1" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.6" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\00.framework\Didar.Services.Notification.Sample.Framework\Didar.Services.Notification.Framework.csproj" />
-    <ProjectReference Include="..\..\01.Core\Didar.Services.Notification.Application\Didar.Services.Notification.Application.csproj" />
-    <ProjectReference Include="..\..\02.Infru\Didar.Services.Notification.Persistance\Didar.Services.Notification.Persistance.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\00.framework\Didar.Services.Notification.Sample.Framework\Didar.Services.Notification.Framework.csproj" />
+		<ProjectReference Include="..\..\01.Core\Didar.Services.Notification.Application\Didar.Services.Notification.Application.csproj" />
+		<ProjectReference Include="..\..\02.Infru\Didar.Services.Notification.Persistance\Didar.Services.Notification.Persistance.csproj" />
+	</ItemGroup>
 
 </Project>
